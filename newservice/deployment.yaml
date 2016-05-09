@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: newservice
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: newservice
+    spec:
+      containers:
+          - image: 340603795304.dkr.ecr.us-east-1.amazonaws.com/newservice:first
+            name: newservice
+            command:
+              - java
+            args:
+              - -jar
+              - newservice-assembly-0.1.0.jar
+              - com.undercarriage.newservice.NewService
+            ports:
+              -
+                containerPort: 9003
+                name: newservice
+            resources:
+              limits:
+                cpu: 300m
+                memory: 200Mi
+      imagePullSecrets:
+        - name: ecrkey

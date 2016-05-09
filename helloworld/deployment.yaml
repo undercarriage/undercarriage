@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        svc: helloworld
+    spec:
+      containers:
+          - image: 340603795304.dkr.ecr.us-east-1.amazonaws.com/helloworld:latest
+            name: helloworld
+            command:
+              - java
+            args:
+              - -jar
+              - helloworld-assembly-0.1.0.jar
+              - com.undercarriage.helloworld.HelloWorld
+            ports:
+              -
+                containerPort: 8080
+                name: http
+            resources:
+              limits:
+                cpu: 300m
+                memory: 200Mi
+      imagePullSecrets:
+        - name: ecrkey

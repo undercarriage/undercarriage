@@ -1,5 +1,10 @@
+*~
 *.class
 *.log
+
+# intellij
+.idea
+*.iml
 
 # sbt specific
 .cache
